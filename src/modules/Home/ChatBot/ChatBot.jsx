@@ -7,12 +7,17 @@ import { useStartSession } from "../hooks/useStartSession";
 import { useHistoryAssistent } from "../hooks/useHistoryAssistent";
 import { useSocket } from "../../../hooks/useSocket";
 import SideAgent from "../Agents/Agents";
+import { useEndSession } from "../hooks/useEndSession";
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
   const [assistentId, setAssistentId] = useState(null);
   const [sessionId, setSessionId] = useState(null);
+  console.log("🚀 ~ Chatbot ~ sessionId:", sessionId);
   const [initialMessages, setInitialMessages] = useState([]);
+  const [currentHistoryActive, setCurrentHistoryActive] = useState(true);
+  console.log("🚀 ~ Chatbot ~ currentHistoryActive:", currentHistoryActive);
+  const endSession = useEndSession();
 
   const { disconnectSocket } = useSocket(sessionId);
 
@@ -37,6 +42,19 @@ const Chatbot = () => {
     setAssistentId(id);
   };
 
+  const handleEndSession = () => {
+    try {
+      endSession.mutateAsync(sessionId);
+      disconnectSocket();
+      setMessages([]);
+      setInitialMessages([]);
+      setAssistentId(null);
+      setSessionId(null);
+    } catch (error) {
+      console.log("🚀 ~ handleEndSession ~ error", error);
+    }
+  };
+
   return (
     <div className="chat-container">
       <ChatHistory
@@ -44,6 +62,7 @@ const Chatbot = () => {
         messages={messages}
         setMessages={handleSendMessage}
         setInitialMessages={setInitialMessages}
+        setCurrentHistoryActive={setCurrentHistoryActive}
       />
 
       <SideAgent
@@ -67,6 +86,8 @@ const Chatbot = () => {
               messages={messages}
               sessionId={sessionId}
               handleSendMessage={handleSendMessage}
+              currentHistoryActive={currentHistoryActive}
+              handleEndSession={handleEndSession}
             />
           </>
         )}

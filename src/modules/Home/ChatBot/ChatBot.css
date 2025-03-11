@@ -60,7 +60,6 @@
 .chat-history li {
   border-radius: 5px;
   margin-bottom: 5px;
-  text-align: end;
 }
 
 .chat-history .user {
@@ -78,7 +77,6 @@
 }
 
 .chat-window {
-  /* max-width: 800px; */
   position: relative;
   width: 100%;
   margin: auto;
@@ -86,7 +84,7 @@
   overflow-y: auto;
   background: white;
   border-left: 2px solid #ddd;
-  padding: 20px;
+  padding: 15px;
 }
 
 .chat-window::-webkit-scrollbar {
@@ -159,16 +157,27 @@
 }
 
 .chat-input {
-  /* max-width: 797px; */
-  width: 90%;
+  width: 95%;
   margin: auto;
   display: flex;
   align-items: center;
-  /* border-top: 2px solid #ddd; */
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-bottom: 15px;
+}
+
+.chat-input-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  margin-bottom: 10px;
+}
+
+.chat-input-container a {
+  cursor: pointer;
+  color: #a9abae;
+  font-size: 16px;
+  font-weight: 500;
+  margin-right: 20px;
 }
 
 .chat-input input {
@@ -251,4 +260,12 @@
   display: flex;
   justify-content: space-between;
   padding: 10px;
+}
+
+.chat-window-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding-bottom: 10px;
 }

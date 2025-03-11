@@ -1,9 +1,10 @@
 // @ts-nocheck
 import { useQuery } from "@tanstack/react-query";
 import api from "../../../api/apiConfig";
+import apiV2 from "../../../api/apiConfigV2";
 
 async function getHistoryAssistent(assistentId) {
-  const response = await api.get(`/assistent/${assistentId}/history`);
+  const response = await apiV2.get(`/assistent/${assistentId}/history`);
   return response?.data;
 }
 
