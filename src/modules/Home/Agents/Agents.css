@@ -174,17 +174,6 @@
   border-radius: 8px;
 }
 
-/* .chat-input {
-  max-width: 797px;
-  width: 100%;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  background: #f9f9f9;
-  border-top: 2px solid #ddd;
-} */
-
 .chat-input input {
   flex-grow: 1;
   padding: 10px;
@@ -203,7 +192,7 @@
   max-width: 35px;
   margin-left: -50px;
   height: 30px;
-  /* border: 1px solid red; */
+  /* border: 1px solid blue; */
 }
 
 .chat-input img {

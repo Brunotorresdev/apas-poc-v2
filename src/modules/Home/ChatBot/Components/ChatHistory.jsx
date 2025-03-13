@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
-import logoApas from "../../../../assets/logoapas.png";
+import logoApasKira from "../../../../assets/logo-apas-kira.jpeg";
+
 import iconChat from "../../../../assets/icon-white.svg";
 import { FaSignOutAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -22,7 +23,9 @@ const ChatHistory = ({
 
   return (
     <div className="chat-history">
-      <img src={logoApas} width={"150px"} alt="" />
+      <div className="logo-apas">
+        <img src={logoApasKira} width={"150px"} alt="" />
+      </div>
 
       <div className="intelligent-agent">
         <img className="icon-chat-apas" src={iconChat} width={"20px"} alt="" />
