@@ -18,6 +18,14 @@
   box-shadow: rgba(0, 0, 0, 0.1) 3px -5px 20px 5px;
 }
 
+.chat-history-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding-bottom: 20px;
+}
+
 .chat-history-content {
   width: 100%;
   overflow-y: auto;
@@ -180,7 +188,7 @@
   margin-right: 20px;
 }
 
-.chat-input input {
+.chat-input textarea {
   flex-grow: 1;
   padding: 10px;
   border: 1px solid #ddd;
@@ -188,9 +196,14 @@
   outline: none;
   background-color: #eeeeee;
   border-radius: 10px;
+  padding: 10px 50px 10px 10px;
+
+  resize: none;
 }
 
-/*  */
+.chat-input textarea::-webkit-scrollbar {
+  width: 8px;
+}
 
 .agents-input {
   background-color: #0b001c;

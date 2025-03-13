@@ -23,7 +23,7 @@ const ChatInput = ({ sessionId, onSendMessage, handleEndSession }) => {
   return (
     <div className="chat-input-container">
       <div className="chat-input">
-        <input
+        <textarea
           type="text"
           placeholder="Digite uma mensagem..."
           value={input}
@@ -35,7 +35,6 @@ const ChatInput = ({ sessionId, onSendMessage, handleEndSession }) => {
             onClick={handleSend}
             className="icon-chat-apas"
             src={sendIcon}
-            // width={"20px"}
             alt=""
           />
         </button>
