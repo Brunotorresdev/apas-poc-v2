@@ -31,10 +31,10 @@ export const useSocket = (sessionId) => {
     };
   }, [sessionId]);
 
-  const sendMessage = (message) => {
+  const sendMessage = (message, type = "text") => {
     if (!socketRef.current || !sessionId) return;
 
-    const newMessage = { type: "text", emitter: "user", body: message };
+    const newMessage = { type, emitter: "user", body: message };
 
     setIsLoading(true);
     socketRef.current.emit("chat-message", {

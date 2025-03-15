@@ -21,7 +21,17 @@ const ChatWindow = ({
           {messages.map((msg, index) => (
             <>
               <div key={index} className={`message ${msg.emitter}`}>
-                <MarkdownRenderer markdownContent={msg.body} />
+                {msg.type === "audio" ? (
+                  <audio style={{ width: " 100%" }} controls>
+                    <source
+                      src={`data:audio/webm;codecs=opus;base64,${msg.body}`}
+                      type="audio/mp3"
+                    />
+                    Seu navegador não suporta o elemento de áudio.
+                  </audio>
+                ) : (
+                  <MarkdownRenderer markdownContent={msg.body} />
+                )}
               </div>
             </>
           ))}

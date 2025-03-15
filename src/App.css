@@ -1,9 +1,35 @@
+@font-face {
+  font-family: "Sunborn";
+  src: url("/fonts/Sunborn-Regular.woff2") format("woff2"),
+    url("/fonts/Sunborn-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("/fonts/ProximaNova-Regular.woff2") format("woff2"),
+    url("/fonts/ProximaNova-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: Helvetica;
   color: #333;
+}
+
+.title-default {
+  font-family: Sunborn;
+  font-size: 45px !important;
+}
+
+.content-default {
+  font-family: Proxima Nova;
+  font-size: 25px !important;
 }
 
 .App {
