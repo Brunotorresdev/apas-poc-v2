@@ -1,11 +1,13 @@
 import * as React from "react";
 import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
-
+import { FaRegTrashAlt } from "react-icons/fa";
 export default function MicComponent({
   audioBase64,
   setAudioBase64,
   setIsRecording,
 }) {
+  const [isCancelled, setIsCancelled] = React.useState(false);
+
   const recorderControls = useAudioRecorder(
     {
       noiseSuppression: true,
@@ -13,7 +15,10 @@ export default function MicComponent({
     },
     (err) => console.table(err)
   );
+
   const addAudioElement = (blob) => {
+    if (isCancelled) return;
+
     const reader = new FileReader();
     reader.readAsDataURL(blob);
     reader.onloadend = () => {
@@ -28,7 +33,15 @@ export default function MicComponent({
     };
   };
 
+  const handleCancel = () => {
+    setIsCancelled(true);
+    recorderControls.stopRecording();
+  };
+
   React.useEffect(() => {
+    if (recorderControls.isRecording) {
+      setIsCancelled(false);
+    }
     setIsRecording(recorderControls.isRecording);
   }, [recorderControls.isRecording]);
 
@@ -40,7 +53,9 @@ export default function MicComponent({
         downloadFileExtension="mp3"
         showVisualizer={false}
       />
-      <br />
+      {recorderControls.isRecording && (
+        <FaRegTrashAlt onClick={handleCancel} className="cancel-button-mic" />
+      )}
     </div>
   );
 }

@@ -299,11 +299,31 @@
   margin: auto;
 }
 
+.cancel-button-mic {
+  fill: red;
+  margin-top: -30px;
+  position: absolute;
+  margin-left: 28px;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.recording {
+  padding-left: 20px;
+}
+
+.audio-recorder-options {
+  margin-top: 0 !important;
+}
+
+.audio-recorder.recording .audio-recorder-mic {
+  display: none;
+}
+
 .audio-recorder .audio-recorder-mic {
   padding-top: 22px !important;
 }
 
 .audio-recorder {
-  margin-top: 18px;
   margin-left: 23px;
 }
