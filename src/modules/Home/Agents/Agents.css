@@ -262,9 +262,18 @@
 }
 
 .header-component {
-  border: 1px solid red;
   width: 100%;
   display: flex;
   justify-content: space-between;
   padding: 10px;
+}
+
+@media screen and (max-width: 900px) {
+  .chat-container {
+    flex-direction: column;
+  }
+
+  .chat-agent {
+    max-width: 100%;
+  }
 }

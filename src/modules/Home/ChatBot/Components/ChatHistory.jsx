@@ -2,9 +2,10 @@ import dayjs from "dayjs";
 import logoApasKira from "../../../../assets/logo-apas-kira.jpeg";
 
 import iconChat from "../../../../assets/icon-white.svg";
-import { FaSignOutAlt } from "react-icons/fa";
+import { FaChevronDown, FaChevronUp, FaSignOutAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../../../hooks/useAuthStore";
+import { useState } from "react";
 
 const ChatHistory = ({
   data,
@@ -15,6 +16,7 @@ const ChatHistory = ({
 }) => {
   const navigate = useNavigate();
   const { setUser } = useAuthStore((state) => state);
+  const [disabledHistory, setDisabledHistory] = useState(false);
 
   const handleLogout = () => {
     setUser(null);
@@ -34,55 +36,79 @@ const ChatHistory = ({
 
       <div className="chat-history-container">
         <div className="chat-history-content">
-          <h3>Histórico de pesquisa</h3>
-          <ul>
-            {data?.map((dateGroup, dateIndex) => {
-              return (
-                <li key={dateIndex}>
-                  {dateGroup?.data[0].messages?.history?.length && (
-                    <strong>
-                      {dayjs(dateGroup.date).format("DD/MM/YYYY")}
-                    </strong>
-                  )}
-                  <ul>
-                    {dateGroup.data.map((msg, index) => {
-                      if (dateGroup.date === "2025-03-10") {
-                      }
-                      if (
-                        !msg.messages?.history ||
-                        msg.messages.history.length === 0
-                      ) {
-                        return null;
-                      }
+          <div className="chat-history-header">
+            <h3>Histórico de pesquisa</h3>{" "}
+            <div className="icon-sign-out-responsive">
+              <FaSignOutAlt
+                fill="#55CAF5"
+                style={{ cursor: "pointer" }}
+                fontSize={"25px"}
+                onClick={handleLogout}
+              />
+              {disabledHistory ? (
+                <FaChevronDown
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setDisabledHistory(!disabledHistory)}
+                />
+              ) : (
+                <FaChevronUp
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setDisabledHistory(!disabledHistory)}
+                />
+              )}
+            </div>
+          </div>
+          {!disabledHistory && (
+            <ul>
+              {data?.map((dateGroup, dateIndex) => {
+                return (
+                  <li key={dateIndex}>
+                    {dateGroup?.data[0].messages?.history?.length && (
+                      <strong>
+                        {dayjs(dateGroup.date).format("DD/MM/YYYY")}
+                      </strong>
+                    )}
+                    <ul>
+                      {dateGroup.data.map((msg, index) => {
+                        if (dateGroup.date === "2025-03-10") {
+                        }
+                        if (
+                          !msg.messages?.history ||
+                          msg.messages.history.length === 0
+                        ) {
+                          return null;
+                        }
 
-                      return (
-                        <li key={msg.id}>
-                          <button
-                            className={"option-history"}
-                            onClick={() => {
-                              setInitialMessages(msg.messages.history);
-                              setMessages(msg.messages.history);
-                              setCurrentHistoryActive(msg.isActived);
-                            }}
-                          >
-                            {`${msg.messages.history[0]?.body} `}
-                          </button>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </li>
-              );
-            })}
-          </ul>
+                        return (
+                          <li key={msg.id}>
+                            <button
+                              className={"option-history"}
+                              onClick={() => {
+                                setInitialMessages(msg.messages.history);
+                                setMessages(msg.messages.history);
+                                setCurrentHistoryActive(msg.isActived);
+                              }}
+                            >
+                              {`${msg.messages.history[0]?.body} `}
+                            </button>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </div>
-
-        <FaSignOutAlt
-          fill="#55CAF5"
-          style={{ cursor: "pointer" }}
-          fontSize={"25px"}
-          onClick={handleLogout}
-        />
+        <div className="icon-sign-out">
+          <FaSignOutAlt
+            fill="#55CAF5"
+            style={{ cursor: "pointer" }}
+            fontSize={"25px"}
+            onClick={handleLogout}
+          />
+        </div>
       </div>
     </div>
   );
