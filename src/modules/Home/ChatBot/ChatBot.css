@@ -347,4 +347,8 @@
   .icon-sign-out {
     display: none;
   }
+
+  .mic-container {
+    display: none;
+  }
 }
