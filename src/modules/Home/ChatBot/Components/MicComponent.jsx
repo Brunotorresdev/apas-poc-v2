@@ -16,21 +16,33 @@ export default function MicComponent({
     (err) => console.table(err)
   );
 
+  // const addAudioElement = (blob) => {
+  //   if (isCancelled) return;
+
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(blob);
+  //   reader.onloadend = () => {
+  //     const base64Audio = reader.result;
+  //     console.log("🚀 ~ Base64 Audio:", base64Audio);
+
+  //     const audioFormatted = base64Audio.split(
+  //       "data:audio/webm;codecs=opus;base64,"
+  //     );
+
+  //     setAudioBase64(audioFormatted[1]);
+  //   };
+  // };
+
   const addAudioElement = (blob) => {
     if (isCancelled) return;
 
     const reader = new FileReader();
-    reader.readAsDataURL(blob);
     reader.onloadend = () => {
-      const base64Audio = reader.result;
+      const base64Audio = reader.result.split(",")[1]; // Remove a parte da URL de dados
       console.log("🚀 ~ Base64 Audio:", base64Audio);
-
-      const audioFormatted = base64Audio.split(
-        "data:audio/webm;codecs=opus;base64,"
-      );
-
-      setAudioBase64(audioFormatted[1]);
+      setAudioBase64(base64Audio);
     };
+    reader.readAsDataURL(blob);
   };
 
   const handleCancel = () => {

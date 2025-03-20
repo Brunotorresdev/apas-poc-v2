@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import MarkdownRenderer from "./MarkdownRenderer";
 import ChatInput from "./ChatInput";
+import ReactPlayer from "react-player";
 
 const ChatWindow = ({
   messages,
@@ -22,13 +23,15 @@ const ChatWindow = ({
             <>
               <div key={index} className={`message ${msg.emitter}`}>
                 {msg.type === "audio" ? (
-                  <audio style={{ width: " 100%" }} controls>
-                    <source
-                      src={`data:audio/webm;codecs=opus;base64,${msg.body}`}
-                      type="audio/mp3"
-                    />
-                    Seu navegador não suporta o elemento de áudio.
-                  </audio>
+                  <>
+                    <audio style={{ width: "100%" }} controls playsInline>
+                      <source
+                        src={`data:audio/mp3;base64,${msg.body}`}
+                        type="audio/mpeg"
+                      />
+                      Seu navegador não suporta o elemento de áudio.
+                    </audio>
+                  </>
                 ) : (
                   <MarkdownRenderer markdownContent={msg.body} />
                 )}
